@@ -35,41 +35,17 @@ const App = () => {
                     <input type="text" onChange={handleRowChange(idx)} />
                     <button onClick={handleRowDelete(idx)}>delete ME</button>
                     <span style={{ border: '1px solid green' }}>{collisonList[idx]}</span>
-                    <span style={{ border: '1px solid blue' }}>{''}</span>
                 </div>
             )
         }) 
     }
 
     useEffect(() => {
-        
-        // const displayColliding = () => {
-        //     // generate avalible arr -> ABC / BCD 
-        //     resultArr = dataArr.map((item) => {
-        //         const leng = item.length;
-        //         if (leng < k) { return }
-        //         let target = leng - k;
-        //         let arr = [];
-        //         for (let index = 0; index < target; index++) {
-        //             const element = array[index];
-        //             // item.slice() ....
-
-        //             arr.push(item.slice());
-        //         }
-
-        //         return arr;
-        //     })
-
-        //     // [[ABC, BCD], [FDS], [BCD]]    
-
-        //     // totest 
-        // }
-        // displayColliding();
-
         const colliding = () => {
             // const collisionList = new Array(rowDatas.length).fill(new Set());
             const collisionList = rowDatas.map(() => new Set());
             rowDatas.forEach((data, rowIdx) => {
+                if (data.length <= kVar) { return }
                 rowDatas.forEach((testData, testIdx) => {
                     if (testIdx === rowIdx || !data || !testData ) { return }
                     if (data.indexOf(testData) !== -1 || testData.indexOf(data) !== -1) {

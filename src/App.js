@@ -30,11 +30,11 @@ const App = () => {
         return rowDatas.map((item, idx) => {
             // return <div> {idx} </div>
             return (
-                <div>
+                <div id={`row${idx}`} className="row" key={idx}>
                     <span style={{ color: 'red'}}>{idx}</span>
-                    <input type="text" onChange={handleRowChange(idx)} />
-                    <button onClick={handleRowDelete(idx)}>delete ME</button>
-                    <span style={{ border: '1px solid green' }}>{collisonList[idx]}</span>
+                    <input type="text" onChange={handleRowChange(idx)} value={rowDatas[idx]}/>
+                    <button className="deleteBtn" onClick={handleRowDelete(idx)}>delete ME</button>
+                    <span className="colliVal" style={{ border: '1px solid green' }}>{collisonList[idx]}</span>
                 </div>
             )
         }) 
@@ -57,14 +57,19 @@ const App = () => {
             setCollisonList(collisionList);
         }
         colliding();
+        console.log('===', kVar, collisonList);
 
     }, [JSON.stringify(rowDatas), kVar]);
 
     return (
-        <div className="App">
-            <button onClick={handleAddButtonClick}>Add Button</button>
-            <label for="kVar">k var: </label>
-            <input type="text" id="kVar" value={kVar} onChange={(e) => { setkVar(+e.target.value) }}/>
+        <div className="App" key={123}>
+            <div style={{ border: '1px solid' }}>
+                <button onClick={handleAddButtonClick} id="addButton">Add Button</button>
+                <div>
+                    <label htmlFor="kVar">k var: </label>
+                    <input type="text" id="kVar" value={kVar} onChange={(e) => { setkVar(+e.target.value) }}/>
+                </div>
+            </div>
             {createRow()}
         </div>
     );
